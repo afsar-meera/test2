@@ -1,31 +1,21 @@
 import streamlit as st
 
-# Streamlit app header
-st.title("Simple Calculator")
+def calculate_simple_interest(principal, rate, time):
+    interest = (principal * rate * time) / 100
+    return interest
 
-# Function to perform the calculation
-def calculate(num1, num2, operation):
-    if operation == "Addition":
-        result = num1 + num2
-    elif operation == "Subtraction":
-        result = num1 - num2
-    elif operation == "Multiplication":
-        result = num1 * num2
-    elif operation == "Division":
-        if num2 != 0:
-            result = num1 / num2
-        else:
-            result = "Error: Division by zero"
-    else:
-        result = "Invalid operation"
-    return result
+st.title('Simple Interest Calculator')
 
-# Streamlit app content
-num1 = st.number_input("Enter the first number:", step=0.1)
-num2 = st.number_input("Enter the second number:", step=0.1)
+# User input for principal amount
+principal_amount = st.number_input('Enter Principal Amount:', min_value=0.0)
 
-operation = st.selectbox("Select operation:", ["Addition", "Subtraction", "Multiplication", "Division"])
+# User input for interest rate
+interest_rate = st.number_input('Enter Annual Interest Rate:', min_value=0.0)
 
-if st.button("Calculate"):
-    result = calculate(num1, num2, operation)
-    st.success(f"Result: {result}")
+# User input for time period
+time_period = st.number_input('Enter Time Period (in years):', min_value=0.0)
+
+# Calculate simple interest when the 'Calculate' button is clicked
+if st.button('Calculate'):
+    simple_interest = calculate_simple_interest(principal_amount, interest_rate, time_period)
+    st.success(f'Simple Interest: {simple_interest:.2f}')
